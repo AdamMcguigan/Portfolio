@@ -1,0 +1,865 @@
+00001000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.16.01
+Created On: 24/03/2021 16:21:09
+
+00000000                             1  *-------------------------------------------------------
+00000000                             2  * Starting memory address for the programme $1000
+00000000                             3  *-------------------------------------------------------
+00000000                             4      
+00001000                             5      org $1000
+00001000                             6  
+00001000                             7  *-------------------------------------------------------
+00001000                             8  *Choose to be a Plumber or a Rabbit 
+00001000                             9  *-------------------------------------------------------
+00001000                            10  
+00001000                            11  *-------------------------------------------------------
+00001000                            12  *Validation values to be used, modify as needed
+00001000                            13  *Add additional validation values as required
+00001000                            14  *-------------------------------------------------------
+00001000  =00000000                 15  exit        EQU 0      used to exit assembly program
+00001000  =00000001                 16  min_potions EQU 1      min number of potions
+00001000  =00000005                 17  max_potions EQU 5      max number of potions
+00001000                            18  
+00001000  =00000001                 19  min_weapons EQU 1      min weapons
+00001000  =00000004                 20  max_weapons EQU 4      max weapons
+00001000                            21  
+00001000  =00000005                 22  win_point   EQU 5      points accumilated on win
+00001000  =00000008                 23  lose_point  EQU 8      points deducted on a loss
+00001000                            24  
+00001000  =0000000F                 25  PLAYER_HEALTH EQU 15   players health
+00001000  =0000000A                 26  ENEMY_HEALTH_ONE EQU 10 Enemies health
+00001000  =0000000A                 27  ENEMY_HEALTH_TWO EQU 10 Enemies health two
+00001000  =00000014                 28  BOSS_HEALTH EQU 20      Boss health 
+00001000                            29  
+00001000  =00000002                 30  DAMAGE_AMOUNT EQU 2    Damage for light attack
+00001000  =00000005                 31  HEAVY_DAMAGE EQU 5     Damage for the heavy attack
+00001000  =00000001                 32  RABBIT_DAMAGE EQU 1    Damage for the rabbit attacks
+00001000  =00000003                 33  HEALING_VALUE EQU 3    this will regen the players health 
+00001000                            34  
+00001000  =00000064                 35  mine_loc    EQU 100    used below for some simple collision detection using CMP
+00001000                            36                         * example for a hit
+00001000                            37  
+00001000                            38  
+00001000                            39  *Start of Game
+00001000                            40  start:
+00001000  11FC 000F 4000            41      move.b  #PLAYER_HEALTH,$4000 put score/health in memory location $4000
+00001006  47F8 4000                 42      lea     $4000,A3   assign address A3 to that memory location
+0000100A                            43      
+0000100A  11FC 000A 4001            44      move.b #ENEMY_HEALTH_ONE,$4001 putting the health of the enemy at mem location $4001
+00001010  49F8 4001                 45      lea $4001,A4               assign address A4 to that memory
+00001014                            46      
+00001014  11FC 000A 4010            47      move.b #ENEMY_HEALTH_TWO,$4010 *putting the health of the enemy at mem location $4010
+0000101A  4BF8 4010                 48      lea $4010,A5
+0000101E                            49      
+0000101E  11FC 0014 4011            50      move.b #BOSS_HEALTH,$4011 putting the health of the boss at mem location $4011
+00001024  4DF8 4011                 51      lea $4011,A6
+00001028                            52  
+00001028  6100 1FE0                 53      bsr     welcome    branch to the welcome subroutine
+0000102C  6100 1FF2                 54      bsr     input      branch to the input subroutine
+00001030  6100 1FCE                 55      bsr     game       branch to the game subroutine
+00001034                            56  *Game loop
+00003000                            57      org     $3000      the rest of the program is to be located from 3000 onwards
+00003000                            58  
+00003000                            59  *-------------------------------------------------------
+00003000                            60  *-------------------Game Subroutine---------------------
+00003000                            61  *-------------------------------------------------------
+00003000                            62  game:
+00003000  6100 0028                 63      bsr     gameloop   branch to gameloop subroutine
+00003004  4E75                      64      rts                return from game: subroutine
+00003006                            65            
+00003006                            66  end:
+00003006  FFFF FFFF                 67      simhalt
+0000300A                            68  
+0000300A                            69  *-------------------------------------------------------
+0000300A                            70  *-------------------Welcome Subroutine------------------
+0000300A                            71  *-------------------------------------------------------
+0000300A                            72  welcome:
+0000300A  6100 01E4                 73      bsr     endl            branch to endl subroutine
+0000300E  43F9 000034ED             74      lea     welcome_msg,A1  assign message to address register A1
+00003014  103C 000E                 75      move.b  #14,D0          move literal 14 to DO
+00003018  4E4F                      76      trap    #15             trap and interpret value in D0
+0000301A  6100 01D4                 77      bsr     endl            branch to endl subroutine
+0000301E  4E75                      78      rts                     return from welcome: subroutine
+00003020                            79  
+00003020                            80  *-------------------------------------------------------
+00003020                            81  *---------Gameplay Input Values Subroutine--------------
+00003020                            82  *-------------------------------------------------------    
+00003020                            83  input:
+00003020  6100 0042                 84      bsr     potions         branch to potion input subroutine
+00003024  6100 009A                 85      bsr     weapons         branch to weaponss input subroutine
+00003028  4E75                      86      rts
+0000302A                            87  
+0000302A                            88  *-------------------------------------------------------
+0000302A                            89  *----------------Gameloop (main loop)-------------------
+0000302A                            90  *------------------------------------------------------- 
+0000302A                            91  gameloop:
+0000302A  6100 01DA                 92      bsr player_attack_select
+0000302E                            93      *bsr     update          branch to update game subroutine 
+0000302E                            94      *bsr     clear_screen    clears the screen         
+0000302E                            95      *bsr     draw            branch to draw screen subroutine
+0000302E                            96      *bsr     clear_screen    clears the screen
+0000302E                            97      *bsr     gameplay        branch to gameplay subroutine
+0000302E                            98      *bsr     clear_screen    clears the screen
+0000302E                            99      *bsr     hud             branch to display HUD subroutine
+0000302E                           100      *bsr     clear_screen    clears the screen
+0000302E                           101      *bsr     replay          branch to replay game subroutine
+0000302E                           102      *bsr     clear_screen    clears the screen
+0000302E  4E75                     103      rts                     return from gameloop: subroutine
+00003030                           104  
+00003030                           105  *-------------------------------------------------------
+00003030                           106  *----------------Update Quest Progress------------------
+00003030                           107  *  Complete Quest
+00003030                           108  *------------------------------------------------------- 
+00003030                           109  update:
+00003030  6100 01BE                110      bsr     endl            print a CR and LF
+00003034  6100 016E                111      bsr     decorate        decorate with dots using a loop
+00003038  43F9 00003661            112      lea     update_msg,A1   
+0000303E  103C 000E                113      move.b  #14,D0
+00003042  4E4F                     114      trap    #15
+00003044  6100 015E                115      bsr     decorate
+00003048  4E75                     116      rts
+0000304A                           117  *-------------------------------------------------------
+0000304A                           118  *-----------------Draw Quest Updates--------------------
+0000304A                           119  * Draw the game progress information, status regarding
+0000304A                           120  * quest
+0000304A                           121  *------------------------------------------------------- 
+0000304A                           122  draw:
+0000304A  6100 01A4                123      bsr     endl
+0000304E  6100 0154                124      bsr     decorate
+00003052  43F9 00003672            125      lea     draw_msg,A1
+00003058  103C 000E                126      move.b  #14,D0
+0000305C  4E4F                     127      trap    #15
+0000305E  6100 0144                128      bsr     decorate
+00003062  4E75                     129      rts
+00003064                           130  
+00003064                           131  *-------------------------------------------------------
+00003064                           132  *--------------------Potions Inventory---------------------
+00003064                           133  * Number of potions to be used in a Quest 
+00003064                           134  *------------------------------------------------------- 
+00003064                           135  potions:
+00003064  6100 018A                136      bsr     endl
+00003068  6100 013A                137      bsr     decorate
+0000306C  43F9 000035BA            138      lea     potions_msg,A1
+00003072  103C 000E                139      move.b  #14,D0
+00003076  4E4F                     140      trap    #15
+00003078  103C 0004                141      move.b  #4,D0
+0000307C  4E4F                     142      trap    #15
+0000307E  11F8 0005 4008           143      move.b  max_potions,$4008
+00003084  45F8 4008                144      lea     $4008,A2
+00003088  1038 4008                145      move.b  $4008,D0
+0000308C                           146      
+0000308C  B27C 0005                147      cmp  #5,D1
+00003090  6700 002E                148      BEQ  weapons
+00003094                           149      *BEQ  weapons
+00003094  B27C 0005                150      cmp  #5,D1
+00003098  6600 0008                151      BNE  error
+0000309C                           152     
+0000309C  6100 0106                153      bsr     decorate
+000030A0  4E75                     154      rts
+000030A2                           155  *------------------------------------------------------
+000030A2                           156  error:
+000030A2  6100 014C                157      bsr endl
+000030A6  6100 00FC                158      bsr decorate
+000030AA  43F9 000036C7            159      lea potionError_msg,A1
+000030B0  103C 000E                160      move.b #14,D0
+000030B4  4E4F                     161      trap #15
+000030B6  6100 00EC                162      bsr decorate
+000030BA  6100 0106                163      bsr clear_screen
+000030BE  61A4                     164      bsr potions
+000030C0                           165      
+000030C0                           166  *-------------------------------------------------------
+000030C0                           167  *-------------------------Weapons-----------------------
+000030C0                           168  * Number of weapons
+000030C0                           169  *-------------------------------------------------------   
+000030C0                           170  weapons:
+000030C0  6100 012E                171      bsr     endl
+000030C4  6100 00FC                172      bsr clear_screen
+000030C8  6100 00DA                173      bsr     decorate
+000030CC  43F9 000035CF            174      lea     weapons_msg,A1
+000030D2  103C 000E                175      move.b  #14,D0
+000030D6  4E4F                     176      trap    #15
+000030D8  103C 0004                177      move.b  #4,D0
+000030DC  4E4F                     178      trap    #15
+000030DE  6100 00C4                179      bsr     decorate
+000030E2  4E75                     180      rts
+000030E4                           181  
+000030E4                           182  *-------------------------------------------------------
+000030E4                           183  *---Game Play (Quest Progress)--------------------------
+000030E4                           184  *------------------------------------------------------- 
+000030E4                           185  gameplay:
+000030E4  6100 010A                186      bsr     endl
+000030E8  6100 00BA                187      bsr     decorate
+000030EC  43F9 0000362A            188      lea     gameplay_msg,A1
+000030F2  103C 000E                189      move.b  #14,D0
+000030F6  4E4F                     190      trap    #15
+000030F8                           191     * move.b  #4,D0
+000030F8                           192      *trap    #15
+000030F8                           193      *put  new branch here for attack
+000030F8  6100 014A                194      bsr player_attack
+000030FC  6100 00A6                195      bsr     decorate
+00003100                           196      *bsr     collision
+00003100  4E75                     197      rts
+00003102                           198  
+00003102                           199  
+00003102                           200  
+00003102                           201  *-------------------------------------------------------
+00003102                           202  *----------Rabbit Attack--------------------------------
+00003102                           203  *------------------------------------------------------- 
+00003102                           204  rabbitAttack:
+00003102  6100 00EC                205      bsr endl
+00003106  6100 009C                206      bsr decorate
+0000310A  43F9 00003A1A            207      lea rabbitAttack_msg,A1
+00003110  103C 000E                208      move.b #14,D0
+00003114  4E4F                     209      trap #15
+00003116                           210      
+00003116  47F8 4000                211      lea $4000,A3
+0000311A  1038 4000                212      move.b $4000,D0
+0000311E                           213      
+0000311E  5300                     214      subi.b #RABBIT_DAMAGE,D0
+00003120                           215      
+00003120  11C0 4000                216      move.b D0,$4000
+00003124                           217      
+00003124  B07C 0000                218      cmp #0,D0
+00003128  6700 0004                219      BEQ lose_screen
+0000312C                           220      
+0000312C                           221      *cmp #250,D0
+0000312C                           222      *BGT lose_screen
+0000312C                           223      
+0000312C  4E75                     224      rts
+0000312E                           225  
+0000312E                           226  
+0000312E                           227  *-------------------------------------------------------
+0000312E                           228  *-----------------LOSE SCREEN----------------------------
+0000312E                           229  *-------------------------------------------------------   
+0000312E                           230  lose_screen:
+0000312E  6100 00C0                231      bsr endl
+00003132  6100 0070                232      bsr decorate
+00003136                           233      
+00003136  43F9 00003A53            234      lea lose_screen_msg,A1
+0000313C  103C 000E                235      move.b #14,D0
+00003140  4E4F                     236      trap #15
+00003142                           237      
+00003142  FFFF FFFF                238      simhalt
+00003146                           239      
+00003146                           240  
+00003146                           241  *-------------------------------------------------------
+00003146                           242  *-----------------Heads Up Display (Score)--------------
+00003146                           243  * Retrieves the score from memory location
+00003146                           244  *-------------------------------------------------------   
+00003146                           245  hud:
+00003146                           246  
+00003146  6100 00A8                247      bsr     endl
+0000314A  6100 0058                248      bsr     decorate
+0000314E  43F9 000036BE            249      lea     hud_msg,A1
+00003154  103C 000E                250      move.b  #14,D0
+00003158  4E4F                     251      trap    #15
+0000315A  1213                     252      move.b  (A3),D1     retrieve the value A3 point to and move to D1
+0000315C  103C 0003                253      move.b  #3,D0       move literal 3 to D0
+00003160  4E4F                     254      trap    #15         intrepret value in D0, which 3 which displays D1
+00003162  6100 0040                255      bsr     decorate
+00003166  4E75                     256      rts
+00003168                           257  
+00003168                           258  *-------------------------------------------------------
+00003168                           259  *-----------------------Being Attacked------------------
+00003168                           260  * This could be used for collision detection
+00003168                           261  *-------------------------------------------------------
+00003168                           262  collision:
+00003168  123C 0064                263      move.b  #mine_loc,D1
+0000316C  B27C 0064                264      cmp     #100,D1 is( x == 100)?
+00003170  6600 0010                265      bne     collision_miss if x is equal to 100, then hit
+00003174                           266  collision_hit:
+00003174                           267      *hit
+00003174  43F9 00003680            268      lea     hit_msg,A1
+0000317A  303C 000E                269      move    #14,D0
+0000317E  4E4F                     270      trap    #15
+00003180  4E75                     271      rts
+00003182                           272      
+00003182                           273  collision_miss:
+00003182                           274      *miss
+00003182  43F9 00003688            275      lea     miss_msg,A1
+00003188  303C 000E                276      move    #14,D0
+0000318C  4E4F                     277      trap    #15
+0000318E  4E75                     278      rts
+00003190                           279  
+00003190                           280  *-------------------------------------------------------
+00003190                           281  *--------------------------Loop-------------------------
+00003190                           282  *-------------------------------------------------------
+00003190                           283  loop:
+00003190  163C 0005                284      move.b  #5, D3 loop counter D3=5
+00003194                           285  next:
+00003194  43F9 0000368E            286      lea     loop_msg,A1
+0000319A  103C 000E                287      move.b  #14,D0
+0000319E  4E4F                     288      trap    #15
+000031A0  5343                     289      sub     #1,D3   decrement loop counter
+000031A2  66F0                     290      bne     next    repeat until D0=0
+000031A4                           291  
+000031A4                           292  *-------------------------------------------------------
+000031A4                           293  *------------------Screen Decoration--------------------
+000031A4                           294  *-------------------------------------------------------
+000031A4                           295  decorate:
+000031A4  163C 003C                296      move.b  #60, D3
+000031A8  6100 0046                297      bsr     endl
+000031AC                           298  out:
+000031AC  43F9 0000368E            299      lea     loop_msg,A1
+000031B2  103C 000E                300      move.b  #14,D0
+000031B6  4E4F                     301      trap    #15
+000031B8  5343                     302      sub     #1,D3   decrement loop counter
+000031BA  66F0                     303      bne     out     repeat until D0=0
+000031BC  6100 0032                304      bsr     endl
+000031C0  4E75                     305      rts
+000031C2                           306      
+000031C2                           307  clear_screen: 
+000031C2  103C 000B                308      move.b  #11,D0      clear screen
+000031C6  323C FF00                309      move.w  #$ff00,D1
+000031CA  4E4F                     310      trap    #15
+000031CC  4E75                     311      rts
+000031CE                           312  *-------------------------------------------------------
+000031CE                           313  *------------------------Replay-------------------------
+000031CE                           314  *-------------------------------------------------------
+000031CE                           315  replay:
+000031CE  6100 0020                316      bsr     endl
+000031D2  43F9 00003690            317      lea     replay_msg,A1
+000031D8  103C 000E                318      move.b  #14,D0
+000031DC  4E4F                     319      trap    #15
+000031DE                           320      
+000031DE  103C 0004                321      move.b  #4,D0
+000031E2  4E4F                     322      trap    #15
+000031E4                           323  
+000031E4  B27C 0000                324      cmp     #exit,D1
+000031E8  6700 FE1C                325      beq     end         if SR Z register contains 1 beq => Branch Equals
+000031EC  6100 FE3C                326      bsr     gameloop
+000031F0                           327  
+000031F0                           328  endl:
+000031F0  48E7 8040                329      movem.l D0/A1,-(A7)
+000031F4  303C 000E                330      move    #14,D0
+000031F8  43F9 000034EA            331      lea     crlf,A1
+000031FE  4E4F                     332      trap    #15
+00003200  4CDF 0201                333      movem.l (A7)+,D0/A1
+00003204  4E75                     334      rts
+00003206                           335      
+00003206                           336  *------------------------------------------------------
+00003206                           337  *--------------------ATTACK SELECTION------------------
+00003206                           338  *------------------------------------------------------
+00003206                           339  PLAYER_ATTACK_SELECT:
+00003206                           340  
+00003206                           341      *loading the player attack selection
+00003206  61E8                     342      bsr endl
+00003208  619A                     343      bsr decorate
+0000320A  43F9 000037A4            344      lea PLAYER_SELECT_MSG,A1
+00003210  103C 000E                345      move.b #14,D0
+00003214  4E4F                     346      trap #15
+00003216                           347      
+00003216                           348      *waiting for player input 
+00003216  103C 0004                349      move.b #4,D0
+0000321A  4E4F                     350      trap   #15
+0000321C  11C0 4005                351      move.b D0, $4005
+00003220  4DF8 4005                352      lea $4005,A6
+00003224                           353      
+00003224                           354      *now compare the value against the input, to see what weapon is picked
+00003224  B27C 0001                355      cmp     #1,D1
+00003228  6700 001A                356      BEQ     PLAYER_ATTACK
+0000322C                           357     
+0000322C  B27C 0002                358      cmp     #2,D1
+00003230  6700 0072                359      BEQ     PLAYER_HEAVY_ATTACK
+00003234                           360  
+00003234  B27C 0003                361      cmp     #3,D1
+00003238  6700 003C                362      BEQ     PLAYER_HEAL
+0000323C                           363      
+0000323C  6100 FF66                364      bsr decorate
+00003240  6180                     365      bsr clear_screen
+00003242                           366     
+00003242  4E75                     367      RTS
+00003244                           368  
+00003244                           369  *------------------------------------------------------
+00003244                           370  *-------------------------ATTACK-----------------------
+00003244                           371  *------------------------------------------------------
+00003244                           372  PLAYER_ATTACK:
+00003244  61AA                     373      bsr  endl
+00003246  43F9 00003775            374      lea  player_basic_attack_msg,A1
+0000324C  103C 000E                375      move.b #14,d0
+00003250  4E4F                     376      trap #15
+00003252                           377      
+00003252                           378      *move.b #ENEMY_HEALTH_ONE,$4002
+00003252  49F8 4001                379      lea $4001,A4
+00003256  1038 4001                380      move.b $4001,d0
+0000325A                           381      
+0000325A  5500                     382      subi.b #DAMAGE_AMOUNT,D0 
+0000325C                           383      
+0000325C  11C0 4001                384      move.b d0,$4001
+00003260                           385      
+00003260  B07C 0000                386      cmp #0,D0
+00003264  6700 0074                387      BEQ SECOND_ROOM
+00003268  6D00 0070                388      BLT SECOND_ROOM
+0000326C                           389      
+0000326C                           390     
+0000326C                           391      
+0000326C  6100 FF36                392      bsr decorate
+00003270  6194                     393      bsr PLAYER_ATTACK_SELECT
+00003272                           394      
+00003272  6100 FE8E                395       bsr rabbitAttack
+00003276                           396  
+00003276                           397  *------------------------------------------------------
+00003276                           398  *--------------------HEALING THE PLAYER-----------------
+00003276                           399  *------------------------------------------------------
+00003276                           400  PLAYER_HEAL:
+00003276  6100 FF78                401      bsr  endl
+0000327A  6100 FF28                402      bsr  decorate
+0000327E  43F9 000037E4            403      lea PLAYER_HEAL_MSG,A1
+00003284  103C 000E                404      move.b #14,D0
+00003288  4E4F                     405      trap #15
+0000328A                           406      
+0000328A                           407      *move.b  #PLAYER_HEALTH,$4000
+0000328A  49F8 4000                408      lea $4000,A4
+0000328E  1038 4000                409      move.b  $4000,d0
+00003292                           410      
+00003292  5600                     411      addi.b   #HEALING_VALUE,D0
+00003294                           412      
+00003294  11C0 4000                413      move.b D0,$4000
+00003298                           414      *lea $4000,A4
+00003298                           415      
+00003298                           416   
+00003298  6100 FF0A                417      bsr decorate
+0000329C  6100 FF68                418      bsr PLAYER_ATTACK_SELECT
+000032A0                           419      
+000032A0  6100 FE60                420       bsr rabbitAttack
+000032A4                           421  *------------------------------------------------------
+000032A4                           422  *--------------------HEAVY ATTACK----------------------
+000032A4                           423  *------------------------------------------------------
+000032A4                           424  PLAYER_HEAVY_ATTACK:     *edit the attacks and have a rabbit attack message display to the player
+000032A4  6100 FF4A                425      bsr   endl
+000032A8  43F9 0000381D            426      lea   PLAYER_HEAVY_MSG,A1
+000032AE  103C 000E                427      move.b #14,D0
+000032B2  4E4F                     428      trap   #15
+000032B4                           429      
+000032B4  49F8 4001                430      lea $4001,A4
+000032B8  1038 4001                431      move.b $4001,d0
+000032BC                           432      
+000032BC  5B00                     433      subi.b #HEAVY_DAMAGE,d0 
+000032BE                           434      
+000032BE  11C0 4001                435      move.b d0,$4001
+000032C2                           436      
+000032C2  B07C 0000                437      cmp #0,D0
+000032C6  6700 0012                438      BEQ SECOND_ROOM
+000032CA  6D00 000E                439      BLT SECOND_ROOM
+000032CE                           440      
+000032CE                           441     
+000032CE                           442  
+000032CE  6100 FED4                443      bsr decorate
+000032D2  6100 FF32                444      bsr PLAYER_ATTACK_SELECT
+000032D6                           445      
+000032D6  6100 FE2A                446      bsr rabbitAttack
+000032DA                           447  *-------------------------------------------------------
+000032DA                           448  *-------------------ROOM TWO----------------------------
+000032DA                           449  *-------------------------------------------------------
+000032DA                           450  SECOND_ROOM:
+000032DA  6100 FF14                451      bsr  endl
+000032DE                           452      
+000032DE  6100 FEE2                453      bsr clear_screen
+000032E2  6100 FEC0                454      bsr decorate
+000032E6  43F9 0000383C            455      lea  room_two_msg,A1
+000032EC  103C 000E                456      move.b #14,d0
+000032F0  4E4F                     457      trap #15
+000032F2                           458      
+000032F2  6100 0006                459      bsr PLAYER_ATTACK_SELECT_TWO
+000032F6                           460      
+000032F6  6100 FEAC                461      bsr decorate
+000032FA                           462      
+000032FA                           463      
+000032FA                           464      
+000032FA                           465      
+000032FA                           466  *------------------------------------------------------
+000032FA                           467  *--------------------ATTACK SELECTION TWO--------------
+000032FA                           468  *------------------------------------------------------
+000032FA                           469  PLAYER_ATTACK_SELECT_TWO:
+000032FA                           470  
+000032FA                           471      *loading the player attack selection
+000032FA  6100 FEF4                472      bsr endl
+000032FE  6100 FEA4                473      bsr decorate
+00003302  43F9 00003737            474      lea weaponSelection_Two_msg,A1
+00003308  103C 000E                475      move.b #14,D0
+0000330C  4E4F                     476      trap #15
+0000330E                           477      
+0000330E                           478      *waiting for player input 
+0000330E  103C 0004                479      move.b #4,D0
+00003312  4E4F                     480      trap   #15
+00003314  11C0 4005                481      move.b D0, $4005
+00003318  4DF8 4005                482      lea $4005,A6
+0000331C                           483      
+0000331C                           484      *now compare the value against the input, to see what weapon is picked
+0000331C  B27C 0001                485      cmp     #1,D1
+00003320  6700 001C                486      BEQ     PLAYER_ATTACK_TWO
+00003324                           487     
+00003324  B27C 0002                488      cmp     #2,D1
+00003328  6700 0048                489      BEQ     PLAYER_HEAVY_ATTACK_TWO
+0000332C                           490  
+0000332C  B27C 0003                491      cmp     #3,D1
+00003330  6700 0076                492      BEQ     PLAYER_HEAL_TWO
+00003334                           493      
+00003334  6100 FE6E                494      bsr decorate
+00003338  6100 FE88                495      bsr clear_screen
+0000333C                           496     
+0000333C  4E75                     497      RTS
+0000333E                           498      
+0000333E                           499  *------------------------------------------------------
+0000333E                           500  *---------------------BASIC ATTACK TWO----------------------
+0000333E                           501  *------------------------------------------------------
+0000333E                           502  PLAYER_ATTACK_TWO:
+0000333E  6100 FEB0                503      bsr  endl
+00003342  43F9 00003775            504      lea  player_basic_attack_msg,A1
+00003348  103C 000E                505      move.b #14,d0
+0000334C  4E4F                     506      trap #15
+0000334E                           507      
+0000334E                           508      *move.b #ENEMY_HEALTH_ONE,$4002
+0000334E  4BF8 4010                509      lea $4010,A5
+00003352  1038 4010                510      move.b $4010,d0
+00003356                           511      
+00003356  5500                     512      subi.b #DAMAGE_AMOUNT,D0 
+00003358                           513      
+00003358  11C0 4010                514      move.b d0,$4010
+0000335C                           515      
+0000335C  B07C 0000                516      cmp #0,D0
+00003360  6700 0074                517      BEQ boss_fight
+00003364  6D00 0070                518      BLT boss_fight
+00003368                           519      
+00003368  6100 FD98                520      bsr rabbitAttack
+0000336C                           521  
+0000336C  6100 FE36                522      bsr decorate
+00003370  6188                     523      bsr PLAYER_ATTACK_SELECT_TWO
+00003372                           524      
+00003372                           525  *------------------------------------------------------
+00003372                           526  *--------------------HEAVY ATTACK TWO------------------
+00003372                           527  *------------------------------------------------------
+00003372                           528  PLAYER_HEAVY_ATTACK_TWO: 
+00003372  6100 FE7C                529      bsr   endl
+00003376  43F9 0000381D            530      lea   PLAYER_HEAVY_MSG,A1
+0000337C  103C 000E                531      move.b #14,D0
+00003380  4E4F                     532      trap   #15
+00003382                           533      
+00003382  4BF8 4010                534      lea $4010,A5
+00003386  1038 4010                535      move.b $4010,d0
+0000338A                           536      
+0000338A  5B00                     537      subi.b #HEAVY_DAMAGE,d0 
+0000338C                           538      
+0000338C  11C0 4010                539      move.b d0,$4010
+00003390                           540      
+00003390  B07C 0000                541      cmp #0,D0
+00003394  6700 0040                542      BEQ boss_fight
+00003398  6D00 003C                543      BLT boss_fight
+0000339C                           544  
+0000339C  6100 FD64                545      bsr rabbitAttack
+000033A0                           546  
+000033A0  6100 FE02                547      bsr decorate
+000033A4  6100 FF54                548      bsr PLAYER_ATTACK_SELECT_TWO
+000033A8                           549      
+000033A8                           550  *------------------------------------------------------
+000033A8                           551  *----------------HEALING THE PLAYER TWO------------
+000033A8                           552  *------------------------------------------------------
+000033A8                           553  PLAYER_HEAL_TWO:
+000033A8  6100 FE46                554      bsr  endl
+000033AC  6100 FDF6                555      bsr  decorate
+000033B0  43F9 000037E4            556      lea PLAYER_HEAL_MSG,A1
+000033B6  103C 000E                557      move.b #14,D0
+000033BA  4E4F                     558      trap #15
+000033BC                           559      
+000033BC  49F8 4000                560      lea $4000,A4
+000033C0  1038 4000                561      move.b  $4000,d0
+000033C4                           562      
+000033C4  5600                     563      addi.b   #HEALING_VALUE,D0
+000033C6                           564      
+000033C6  11C0 4000                565      move.b D0,$4000
+000033CA                           566      
+000033CA  6100 FD36                567      bsr rabbitAttack
+000033CE                           568  
+000033CE  6100 FDD4                569      bsr decorate
+000033D2  6100 FF26                570      bsr PLAYER_ATTACK_SELECT_TWO
+000033D6                           571      
+000033D6                           572  *-------------------------------------------------------
+000033D6                           573  *-------------------BOSS FIGHT---------------------------
+000033D6                           574  *-------------------------------------------------------
+000033D6                           575  BOSS_FIGHT:
+000033D6  6100 FE18                576      bsr  endl
+000033DA                           577      
+000033DA  6100 FDE6                578      bsr clear_screen
+000033DE  6100 FDC4                579      bsr decorate
+000033E2  43F9 000038DB            580      lea  boss_fight_msg,A1
+000033E8  103C 000E                581      move.b #14,d0
+000033EC  4E4F                     582      trap #15
+000033EE                           583      
+000033EE  6100 0006                584      bsr PLAYER_ATTACK_SELECT_THREE
+000033F2                           585      
+000033F2  6100 FDB0                586      bsr decorate
+000033F6                           587  
+000033F6                           588  *------------------------------------------------------
+000033F6                           589  *---------------ATTACK SELECTION THREE--------------
+000033F6                           590  *------------------------------------------------------
+000033F6                           591  PLAYER_ATTACK_SELECT_THREE:
+000033F6                           592  
+000033F6                           593      *loading the player attack selection
+000033F6  6100 FDF8                594      bsr endl
+000033FA  6100 FDA8                595      bsr decorate
+000033FE  43F9 00003737            596      lea weaponSelection_Two_msg,A1
+00003404  103C 000E                597      move.b #14,D0
+00003408  4E4F                     598      trap #15
+0000340A                           599      
+0000340A                           600      *waiting for player input 
+0000340A  103C 0004                601      move.b #4,D0
+0000340E  4E4F                     602      trap   #15
+00003410  11C0 4005                603      move.b D0, $4005
+00003414  4DF8 4005                604      lea $4005,A6
+00003418                           605      
+00003418                           606      *now compare the value against the input, to see what weapon is picked
+00003418  B27C 0001                607      cmp     #1,D1
+0000341C  6700 001C                608      BEQ     PLAYER_ATTACK_THREE
+00003420                           609     
+00003420  B27C 0002                610      cmp     #2,D1
+00003424  6700 0048                611      BEQ     PLAYER_HEAVY_ATTACK_THREE
+00003428                           612  
+00003428  B27C 0003                613      cmp     #3,D1
+0000342C  6700 0072                614      BEQ     PLAYER_HEAL_THREE
+00003430                           615      
+00003430  6100 FD72                616      bsr decorate
+00003434  6100 FD8C                617      bsr clear_screen
+00003438                           618     
+00003438  4E75                     619      RTS
+0000343A                           620  
+0000343A                           621  *------------------------------------------------------
+0000343A                           622  *---------------------BASIC ATTACK THREE----------------------
+0000343A                           623  *------------------------------------------------------
+0000343A                           624  PLAYER_ATTACK_THREE:
+0000343A  6100 FDB4                625      bsr  endl
+0000343E  43F9 00003775            626      lea  player_basic_attack_msg,A1
+00003444  103C 000E                627      move.b #14,d0
+00003448  4E4F                     628      trap #15
+0000344A                           629      
+0000344A  4BF8 4011                630      lea $4011,A5
+0000344E  1038 4011                631      move.b $4011,d0
+00003452                           632      
+00003452  5500                     633      subi.b #DAMAGE_AMOUNT,D0 
+00003454                           634      
+00003454  11C0 4011                635      move.b d0,$4011
+00003458                           636      
+00003458  B07C 0000                637      cmp #0,D0
+0000345C  6700 0070                638      BEQ WIN_SCREEN
+00003460  6D00 FF74                639      BLT boss_fight
+00003464                           640     
+00003464  6100 FC9C                641      bsr rabbitAttack
+00003468                           642      
+00003468  6100 FD3A                643      bsr decorate
+0000346C  6188                     644      bsr PLAYER_ATTACK_SELECT_THREE
+0000346E                           645      
+0000346E                           646  *------------------------------------------------------
+0000346E                           647  *--------------------HEAVY ATTACK THREE------------------
+0000346E                           648  *------------------------------------------------------
+0000346E                           649  PLAYER_HEAVY_ATTACK_THREE: 
+0000346E  6100 FD80                650      bsr   endl
+00003472  43F9 0000381D            651      lea   PLAYER_HEAVY_MSG,A1
+00003478  103C 000E                652      move.b #14,D0
+0000347C  4E4F                     653      trap   #15
+0000347E                           654      
+0000347E  4BF8 4011                655      lea $4011,A5
+00003482  1038 4011                656      move.b $4011,d0
+00003486                           657      
+00003486  5B00                     658      subi.b #HEAVY_DAMAGE,d0 
+00003488                           659      
+00003488  11C0 4011                660      move.b d0,$4011
+0000348C                           661      
+0000348C  B07C 0000                662      cmp #0,D0
+00003490  6700 003C                663      BEQ WIN_SCREEN
+00003494                           664     
+00003494  6100 FC6C                665      bsr rabbitAttack
+00003498                           666      
+00003498  6100 FD0A                667      bsr decorate
+0000349C  6100 FF58                668      bsr PLAYER_ATTACK_SELECT_THREE
+000034A0                           669      
+000034A0                           670  *------------------------------------------------------
+000034A0                           671  *----------------HEALING THE PLAYER THREE------------
+000034A0                           672  *------------------------------------------------------
+000034A0                           673  PLAYER_HEAL_THREE:
+000034A0  6100 FD4E                674      bsr  endl
+000034A4  6100 FCFE                675      bsr  decorate
+000034A8  43F9 000037E4            676      lea PLAYER_HEAL_MSG,A1
+000034AE  103C 000E                677      move.b #14,D0
+000034B2  4E4F                     678      trap #15
+000034B4                           679      
+000034B4  49F8 4000                680      lea $4000,A4
+000034B8  1038 4000                681      move.b  $4000,d0
+000034BC                           682      
+000034BC  5600                     683      addi.b   #HEALING_VALUE,D0
+000034BE                           684      
+000034BE  11C0 4000                685      move.b D0,$4000
+000034C2                           686      
+000034C2  6100 FC3E                687      bsr rabbitAttack
+000034C6                           688      
+000034C6  6100 FCDC                689      bsr decorate
+000034CA  6100 FF2A                690      bsr PLAYER_ATTACK_SELECT_THREE
+000034CE                           691      
+000034CE                           692      
+000034CE                           693  *------------------------------------------------------
+000034CE                           694  *----------------HEALING THE PLAYER THREE------------
+000034CE                           695  *------------------------------------------------------
+000034CE                           696  WIN_SCREEN:
+000034CE  6100 FD20                697      bsr  endl
+000034D2                           698      
+000034D2  6100 FCEE                699      bsr clear_screen
+000034D6  6100 FCCC                700      bsr decorate
+000034DA  43F9 00003957            701      lea  win_screen_msg,A1
+000034E0  103C 000E                702      move.b #14,d0
+000034E4  4E4F                     703      trap #15
+000034E6  6100 FCBC                704      bsr decorate
+000034EA                           705      
+000034EA                           706  
+000034EA                           707  
+000034EA                           708  *-------------------------------------------------------
+000034EA                           709  *-------------------Data Delarations--------------------
+000034EA                           710  *-------------------------------------------------------
+000034EA                           711  
+000034EA                           712  
+000034EA                           713  
+000034EA= 0D 0A 00                 714  crlf:           dc.b    $0D,$0A,0
+000034ED= 2A 2A 2A 2A 2A 2A ...    715  welcome_msg:    dc.b    '************************************************************'
+00003529= 0D 0A                    716                  dc.b    $0D,$0A
+0000352B= 42 61 74 74 6C 65 ...    717                  dc.b    'Battle of Plumbers Vs Rabbits, Plumbers Rise Up !'
+0000355C= 0D 0A                    718                  dc.b    $0D,$0A
+0000355E= 2A 2A 2A 2A 2A 2A ...    719                  dc.b    '************************************************************'
+0000359A= 0D 0A 00                 720                  dc.b    $0D,$0A,0
+0000359D= 50 6F 74 69 6F 6E ...    721  potion_msg:     dc.b    'Potion ....'
+000035A8= 0D 0A                    722                  dc.b    $0D,$0A
+000035AA= 45 6E 74 65 72 20 ...    723                  dc.b    'Enter Potion : ',0
+000035BA= 4E 75 6D 62 65 72 ...    724  potions_msg:    dc.b    'Number of potions : ',0
+000035CF= 6D 69 6E 69 6D 75 ...    725  weapons_msg:    dc.b    'minimum requirement is 2 i.e. Pipe Wrench x 1 and 20mm Spanner x 1.'
+00003612= 0D 0A                    726                  dc.b    $0D,$0A
+00003614= 45 6E 74 65 72 20 ...    727                  dc.b    'Enter # of weapons : ',0
+0000362A= 50 6C 75 6D 62 65 ...    728  gameplay_msg:   dc.b    'Plumber, Ready your weapons there is a rabbit nearby!'
+0000365F= 0D 0A                    729                  dc.b    $0D,$0A
+00003661= 55 70 64 61 74 65 ...    730  update_msg:     dc.b    'Update Message!'
+00003670= 0D 0A                    731                  dc.b    $0D,$0A
+00003672= 44 72 61 77 20 53 ...    732  draw_msg:       dc.b    'Draw Screen !',0
+00003680= 53 74 72 69 6B 65 ...    733  hit_msg:        dc.b    'Strike!',0
+00003688= 4D 69 73 73 21 00        734  miss_msg:       dc.b    'Miss!',0
+0000368E= 2E 00                    735  loop_msg:       dc.b    '.',0
+00003690= 45 6E 74 65 72 20 ...    736  replay_msg:     dc.b    'Enter 0 to Quit any other number to replay : ',0
+000036BE= 53 63 6F 72 65 20 ...    737  hud_msg:        dc.b    'Score : ',0
+000036C7= 4D 61 78 20 70 6F ...    738  potionError_msg dc.b    'Max potions is 5, please enter the correct amount!',0
+000036FA= 70 72 65 73 73 20 ...    739  weaponSelection_msg dc.b    'press 1 for pipe wrench, 2 for 20mm spanner and 3 for potion',0
+00003737= 70 72 65 73 73 20 ...    740  weaponSelection_Two_msg dc.b    'press 1 for metal file, 2 for Big Boi wrench and 3 for potion',0
+00003775= 59 6F 75 20 68 61 ...    741  player_basic_attack_msg dc.b 'You have attacked the enemy and dealt 2 damage',0
+000037A4                           742                          
+000037A4= 50 72 65 73 73 20 ...    743  PLAYER_SELECT_MSG dc.b 'Press 1 for a pipe wrench, 2 for 20mm spanner or 3 for a potion',0
+000037E4= 59 6F 75 20 68 61 ...    744  PLAYER_HEAL_MSG dc.b  'You have used a potion to heal, you have regained health',0
+0000381D= 59 6F 75 20 68 61 ...    745  PLAYER_HEAVY_MSG dc.b 'You have chosen a heavy attack',0
+0000383C= 57 65 6C 6C 20 44 ...    746  room_two_msg dc.b 'Well Done Player, you defeated the enemy grunt'
+0000386A= 0D 0A                    747               dc.b $0D,$0A
+0000386C= 47 65 74 20 72 65 ...    748               dc.b 'Get ready player, theres another rabbit nearby'
+0000389A= 0D 0A                    749               dc.b $0D,$0A
+0000389C= 43 61 72 65 66 75 ...    750               dc.b 'Carefull Player, this rabbit seems more powerful than the last',0
+000038DB= 54 68 69 73 20 69 ...    751  boss_fight_msg dc.b 'This is it Player! we made it to the final boss'
+0000390A= 0D 0A                    752                 dc.b $0D,$0A
+0000390C= 69 66 20 77 65 20 ...    753                 dc.b 'if we clear out this boss this region will be free from these evil rabbits',0
+00003957= 43 4F 4E 47 52 41 ...    754  win_screen_msg dc.b 'CONGRATULATIONS PLAYER!! you defeated the boss'
+00003985= 0D 0A                    755                 dc.b $0D,$0A
+00003987= 41 73 20 61 20 72 ...    756                 dc.b 'As a reward for your troubles, we bestow upon you the blade of olympus,'
+000039CE= 0D 0A                    757                 dc.b $0D,$0A
+000039D0= 48 79 6C 69 61 6E ...    758                 dc.b 'Hylian Shield,'
+000039DE= 0D 0A                    759                 dc.b $0D,$0A
+000039E0= 67 6F 6C 64 65 6E ...    760                 dc.b 'golden TT'
+000039E9= 0D 0A                    761                 dc.b $0D,$0A
+000039EB= 51 75 61 64 72 61 ...    762                 dc.b 'Quadra Turbo-R 740'
+000039FD= 0D 0A                    763                 dc.b $0D,$0A
+000039FF= 66 69 6E 61 6C 6C ...    764                 dc.b 'finally 100,000 cold coins',0
+00003A1A= 43 61 72 65 66 75 ...    765  rabbitAttack_msg dc.b 'Carefull Player, those rabbits got some big talons on em',0
+00003A53= 59 4F 55 20 4C 4F ...    766  lose_screen_msg dc.b 'YOU LOSE! GET GUD SCRUB',0               
+00003A6C                           767  health:     ds.w    1   Players Health
+00003A6E                           768  score:      ds.w    1   Reserve space for score
+00003A70                           769  
+00003A70                           770      end start
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+BOSS_FIGHT          33D6
+BOSS_FIGHT_MSG      38DB
+BOSS_HEALTH         14
+CLEAR_SCREEN        31C2
+COLLISION           3168
+COLLISION_HIT       3174
+COLLISION_MISS      3182
+CRLF                34EA
+DAMAGE_AMOUNT       2
+DECORATE            31A4
+DRAW                304A
+DRAW_MSG            3672
+END                 3006
+ENDL                31F0
+ENEMY_HEALTH_ONE    A
+ENEMY_HEALTH_TWO    A
+ERROR               30A2
+EXIT                0
+GAME                3000
+GAMELOOP            302A
+GAMEPLAY            30E4
+GAMEPLAY_MSG        362A
+HEALING_VALUE       3
+HEALTH              3A6C
+HEAVY_DAMAGE        5
+HIT_MSG             3680
+HUD                 3146
+HUD_MSG             36BE
+INPUT               3020
+LOOP                3190
+LOOP_MSG            368E
+LOSE_POINT          8
+LOSE_SCREEN         312E
+LOSE_SCREEN_MSG     3A53
+MAX_POTIONS         5
+MAX_WEAPONS         4
+MINE_LOC            64
+MIN_POTIONS         1
+MIN_WEAPONS         1
+MISS_MSG            3688
+NEXT                3194
+OUT                 31AC
+PLAYER_ATTACK       3244
+PLAYER_ATTACK_SELECT  3206
+PLAYER_ATTACK_SELECT_THREE  33F6
+PLAYER_ATTACK_SELECT_TWO  32FA
+PLAYER_ATTACK_THREE  343A
+PLAYER_ATTACK_TWO   333E
+PLAYER_BASIC_ATTACK_MSG  3775
+PLAYER_HEAL         3276
+PLAYER_HEALTH       F
+PLAYER_HEAL_MSG     37E4
+PLAYER_HEAL_THREE   34A0
+PLAYER_HEAL_TWO     33A8
+PLAYER_HEAVY_ATTACK  32A4
+PLAYER_HEAVY_ATTACK_THREE  346E
+PLAYER_HEAVY_ATTACK_TWO  3372
+PLAYER_HEAVY_MSG    381D
+PLAYER_SELECT_MSG   37A4
+POTIONERROR_MSG     36C7
+POTIONS             3064
+POTIONS_MSG         35BA
+POTION_MSG          359D
+RABBITATTACK        3102
+RABBITATTACK_MSG    3A1A
+RABBIT_DAMAGE       1
+REPLAY              31CE
+REPLAY_MSG          3690
+ROOM_TWO_MSG        383C
+SCORE               3A6E
+SECOND_ROOM         32DA
+START               1000
+UPDATE              3030
+UPDATE_MSG          3661
+WEAPONS             30C0
+WEAPONSELECTION_MSG  36FA
+WEAPONSELECTION_TWO_MSG  3737
+WEAPONS_MSG         35CF
+WELCOME             300A
+WELCOME_MSG         34ED
+WIN_POINT           5
+WIN_SCREEN          34CE
+WIN_SCREEN_MSG      3957

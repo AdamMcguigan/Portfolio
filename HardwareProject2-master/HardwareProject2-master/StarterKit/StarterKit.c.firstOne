@@ -1,0 +1,38 @@
+#include <stdbool.h>
+#include <stdlib.h>
+#include <avr/io.h>
+#include <avr/pgmspace.h>
+#include <uzebox.h>
+#include <defines.h>
+
+#include "data/font-6x12-full.inc"
+#include "StarterKit.h"
+
+int main(){
+	//Set font and tiles to be used, and call prior to ClearVram();
+	SetFontTable(font);
+
+	//Clear the screen (fills Vram with tile zero)
+	ClearVram();
+
+	PrintChar(10,10,'A');
+	PrintChar(11,10,'d');
+	PrintChar(12,10,'a');
+	PrintChar(13,10,'m');
+    PrintChar(14,10,' ');
+    PrintChar(15,10,'M');
+	PrintChar(16,10,'c');
+	PrintChar(17,10,'G');
+	PrintChar(18,10,'u');
+    PrintChar(19,10,'i');
+	PrintChar(20,10,'g');
+	PrintChar(21,10,'a');
+	PrintChar(22,10,'n');	
+
+    
+
+	while(1)
+	{
+		startgame();
+	}
+}
