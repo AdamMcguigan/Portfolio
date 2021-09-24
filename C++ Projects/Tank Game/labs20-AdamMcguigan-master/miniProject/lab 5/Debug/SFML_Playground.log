@@ -1,0 +1,44 @@
+﻿  Game.cpp
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\include\Projectile.h(3,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(126,12): warning C4244:  'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(199,49): warning C4244:  'argument': conversion from 'float' to 'sf::Int32', possible loss of data
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(224,45): warning C4244:  'argument': conversion from 'const float' to 'sf::Int32', possible loss of data
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(235,49): warning C4244:  'argument': conversion from 'float' to 'sf::Int32', possible loss of data
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(296,24): warning C4244:  '-=': conversion from 'double' to 'sf::Int32', possible loss of data
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(315,58): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(315,35): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(317,30): warning C4244:  'argument': conversion from 'const double' to 'float', possible loss of data
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(391,68): warning C4244:  'argument': conversion from 'float' to 'sf::Int32', possible loss of data
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(417,68): warning C4244:  'argument': conversion from 'float' to 'sf::Int32', possible loss of data
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(441,68): warning C4244:  'argument': conversion from 'float' to 'sf::Int32', possible loss of data
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(464,68): warning C4244:  'argument': conversion from 'float' to 'sf::Int32', possible loss of data
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(535,18): warning C4244:  'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(536,18): warning C4244:  'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(542,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(556,49): warning C4244:  'argument': conversion from 'float' to 'sf::Int32', possible loss of data
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(563,21): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(578,46): warning C4244:  'argument': conversion from 'const float' to 'sf::Int32', possible loss of data
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(579,50): warning C4244:  'argument': conversion from 'float' to 'sf::Int32', possible loss of data
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(650,17): warning C4244:  'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(650,17): warning C4244:         with
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(650,17): warning C4244:         [
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(650,17): warning C4244:             T=float
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(650,17): warning C4244:         ]
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(649,44): warning C4244:  'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(649,44): warning C4244:         with
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(649,44): warning C4244:         [
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(649,44): warning C4244:             T=float
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(649,44): warning C4244:         ]
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(660,47): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(659,75): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(668,50): warning C4244:  'argument': conversion from 'float' to 'T', possible loss of data
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(668,50): warning C4244:         with
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(668,50): warning C4244:         [
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(668,50): warning C4244:             T=int
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(668,50): warning C4244:         ]
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(752,46): warning C4244:  'argument': conversion from 'const float' to 'sf::Int32', possible loss of data
+  main.cpp
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\src\Game.cpp(753,50): warning C4244:  'argument': conversion from 'float' to 'sf::Int32', possible loss of data
+  Generating Code...
+C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\include\Projectile.h(3,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+  SFML_Playground.vcxproj -> C:\Users\User\Downloads\labs20-AdamMcguigan-master\labs20-AdamMcguigan-master\miniProject\lab 5\Debug\SFML_Playground.exe

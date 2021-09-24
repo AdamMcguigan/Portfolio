@@ -1,0 +1,13 @@
+﻿  simpleshadows.cpp
+D:\Visual Studio Repo\Motion Graphics\simple shadows\firstGame\simpleshadows.cpp(28,12): warning C4244:  'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\Visual Studio Repo\Motion Graphics\simple shadows\firstGame\simpleshadows.cpp(100,47): warning C4244:  'argument': conversion from 'T' to 'float', possible loss of data
+D:\Visual Studio Repo\Motion Graphics\simple shadows\firstGame\simpleshadows.cpp(100,47): warning C4244:         with
+D:\Visual Studio Repo\Motion Graphics\simple shadows\firstGame\simpleshadows.cpp(100,47): warning C4244:         [
+D:\Visual Studio Repo\Motion Graphics\simple shadows\firstGame\simpleshadows.cpp(100,47): warning C4244:             T=int
+D:\Visual Studio Repo\Motion Graphics\simple shadows\firstGame\simpleshadows.cpp(100,47): warning C4244:         ]
+D:\Visual Studio Repo\Motion Graphics\simple shadows\firstGame\simpleshadows.cpp(100,35): warning C4244:  'argument': conversion from 'T' to 'float', possible loss of data
+D:\Visual Studio Repo\Motion Graphics\simple shadows\firstGame\simpleshadows.cpp(100,35): warning C4244:         with
+D:\Visual Studio Repo\Motion Graphics\simple shadows\firstGame\simpleshadows.cpp(100,35): warning C4244:         [
+D:\Visual Studio Repo\Motion Graphics\simple shadows\firstGame\simpleshadows.cpp(100,35): warning C4244:             T=int
+D:\Visual Studio Repo\Motion Graphics\simple shadows\firstGame\simpleshadows.cpp(100,35): warning C4244:         ]
+  firstGame.vcxproj -> D:\Visual Studio Repo\Motion Graphics\simple shadows\Debug\firstGame.exe

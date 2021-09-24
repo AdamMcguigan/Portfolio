@@ -1,0 +1,3 @@
+﻿  Game.cpp
+D:\Visual Studio Repo\Gameplay Programming\Animated FSM\AnimatedSpritesFSM\FSM using SFML\FSM using SFML\Game.cpp(73,12): warning C4244:  'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  FSM using SFML.vcxproj -> D:\Visual Studio Repo\Gameplay Programming\Animated FSM\AnimatedSpritesFSM\FSM using SFML\Debug\FSM using SFML.exe

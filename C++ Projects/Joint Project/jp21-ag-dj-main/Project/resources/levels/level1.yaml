@@ -1,0 +1,25 @@
+
+tanks:
+   - position: {x: 350, y: 350}
+     scale: 1.5
+     rotation: 180
+
+
+obstacles: 
+   - type: wall
+     position: {x: 700, y: 460}
+     scale: 2.5
+     rotation: 0
+   - type: wall
+     position: {x: 784, y: 462}
+     scale: 2.5
+     rotation: 10
+   - type: wall
+     position: {x: 870, y: 470}
+     scale: 2.5
+     rotation: 20
+
+
+
+background:
+   file: background.jpg # Sample comment

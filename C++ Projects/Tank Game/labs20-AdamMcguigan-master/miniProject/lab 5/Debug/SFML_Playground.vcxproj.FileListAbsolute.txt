@@ -1,0 +1,4 @@
+C:\Users\adamm\Desktop\Mini - Project\labs20-AdamMcguigan\miniProject\lab 5\Debug\SFML_Playground.exe
+C:\Users\adamm\Desktop\Mini - Project\labs20-AdamMcguigan\miniProject\lab 5\Debug\SFML_Playground.pdb
+C:\Users\adamm\Desktop\labs20-AdamMcguigan\miniProject\lab 5\Debug\SFML_Playground.exe
+C:\Users\adamm\Desktop\labs20-AdamMcguigan\miniProject\lab 5\Debug\SFML_Playground.pdb

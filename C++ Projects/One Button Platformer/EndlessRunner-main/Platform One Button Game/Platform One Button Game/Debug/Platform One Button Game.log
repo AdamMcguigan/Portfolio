@@ -1,0 +1,54 @@
+﻿  main.cpp
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\Player.h(29,33): warning C4244:  'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\Player.h(29,33): warning C4244:         with
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\Player.h(29,33): warning C4244:         [
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\Player.h(29,33): warning C4244:             T=float
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\Player.h(29,33): warning C4244:         ]
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\Player.h(28,47): warning C4244:  'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\Player.h(28,47): warning C4244:         with
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\Player.h(28,47): warning C4244:         [
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\Player.h(28,47): warning C4244:             T=float
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\Player.h(28,47): warning C4244:         ]
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\coin.h(29,33): warning C4244:  'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\coin.h(29,33): warning C4244:         with
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\coin.h(29,33): warning C4244:         [
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\coin.h(29,33): warning C4244:             T=float
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\coin.h(29,33): warning C4244:         ]
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\coin.h(28,47): warning C4244:  'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\coin.h(28,47): warning C4244:         with
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\coin.h(28,47): warning C4244:         [
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\coin.h(28,47): warning C4244:             T=float
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\coin.h(28,47): warning C4244:         ]
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\Particle.h(59,116): warning C4244:  'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\Particle.h(59,116): warning C4244:         with
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\Particle.h(59,116): warning C4244:         [
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\Particle.h(59,116): warning C4244:             T=float
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\Particle.h(59,116): warning C4244:         ]
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\Particle.h(59,81): warning C4244:  'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\Particle.h(59,81): warning C4244:         with
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\Particle.h(59,81): warning C4244:         [
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\Particle.h(59,81): warning C4244:             T=float
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\Particle.h(59,81): warning C4244:         ]
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\main.cpp(59,51): warning C4305:  'initializing': truncation from 'double' to 'float'
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\main.cpp(60,28): warning C4305:  'initializing': truncation from 'double' to 'float'
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\main.cpp(150,1): warning C4305:  'argument': truncation from 'double' to 'float'
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\main.cpp(154,1): warning C4305:  'argument': truncation from 'double' to 'float'
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\main.cpp(183,48): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\main.cpp(183,38): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\main.cpp(190,48): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\main.cpp(190,38): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\main.cpp(196,48): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\main.cpp(196,38): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\main.cpp(204,48): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\main.cpp(204,38): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\main.cpp(212,48): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\main.cpp(212,38): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\main.cpp(220,48): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\main.cpp(220,38): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\main.cpp(295,1): warning C4305:  '=': truncation from 'double' to 'float'
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\main.cpp(308,1): warning C4305:  '=': truncation from 'double' to 'float'
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\main.cpp(325,1): warning C4305:  '=': truncation from 'double' to 'float'
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\main.cpp(345,33): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Platform One Button Game\main.cpp(354,1): warning C4305:  '=': truncation from 'double' to 'float'
+  LINK : C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Debug\Platform One Button Game.exe not found or not built by the last incremental link; performing full link
+  Platform One Button Game.vcxproj -> C:\Users\User\Downloads\EndlessRunner-main\EndlessRunner-main\Platform One Button Game\Debug\Platform One Button Game.exe

@@ -1,0 +1,118 @@
+
+ships:
+   - position: {x: 100, y: 100}
+     scale: 1.5
+     rotation: 180
+
+
+
+obstacles: 
+   - type: wall
+     position: {x: 25, y: 660}
+     scale: 1
+     rotation: 0
+   - type: wall
+     position: {x: 57, y: 660}
+     scale: 1
+     rotation: 0
+   - type: wall
+     position: {x: 89, y: 660}
+     scale: 1
+     rotation: 0
+   - type: wall
+     position: {x: 241, y: 685}
+     scale: 1
+     rotation: 0
+   - type: wall
+     position: {x: 272, y: 811}
+     scale: 1
+     rotation: 90
+   - type: wall
+     position: {x: 272, y: 843}
+     scale: 1
+     rotation: 90
+   - type: wall
+     position: {x: 272, y: 875}
+     scale: 1
+     rotation: 90
+   - type: wall
+     position: {x: 1380, y: 250}
+     scale: 1
+     rotation: 0
+   - type: wall
+     position: {x: 1348, y: 250}
+     scale: 1
+     rotation: 0
+   - type: wall
+     position: {x: 1242, y: 250}
+     scale: 1
+     rotation: 135
+   - type: wall
+     position: {x: 1168, y: 220}
+     scale: 1
+     rotation: 135
+   - type: wall
+     position: {x: 1168, y: 140}
+     scale: 1
+     rotation: 90
+   - type: wall
+     position: {x: 1168, y: 108}
+     scale: 1
+     rotation: 90
+   - type: wall
+     position: {x: 400, y: 200}
+     scale: 1
+     rotation: 90
+   - type: wall
+     position: {x: 400, y: 233}
+     scale: 1
+     rotation: 90
+   - type: wall
+     position: {x: 400, y: 332}
+     scale: 1
+     rotation: 90
+   - type: wall
+     position: {x: 400, y: 364}
+     scale: 1
+     rotation: 90
+   - type: wall
+     position: {x: 400, y: 396}
+     scale: 1
+     rotation: 90
+   - type: wall
+     position: {x: 900, y: 632}
+     scale: 1
+     rotation: 0
+   - type: wall
+     position: {x: 933, y: 632}
+     scale: 1
+     rotation: 0
+   - type: wall
+     position: {x: 966, y: 632}
+     scale: 1
+     rotation: 0
+   - type: wall
+     position: {x: 999, y: 632}
+     scale: 1
+     rotation: 0
+   - type: wall
+     position: {x: 1032, y: 632}
+     scale: 1
+     rotation: 0
+
+
+background:
+   file: background.jpg # Sample comment
+
+
+
+enemy:
+   - position: {x: 9999, y: 9999}
+     scale: 1.5
+     rotation: 0
+
+
+ai_ship:
+     position: {x: 600, y: 700}
+     max_projectiles: 10
+     reload_time: 1000
