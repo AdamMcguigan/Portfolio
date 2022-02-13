@@ -83,5 +83,3 @@ On Windows ensure paths set for each of the following:
 * Beginners Introduction to the Assembly Language of ATMEL AVR Microprocessors http://www.avr-asm-download.de/beginner_en.pdf
 * Linux Setup guide (used to create install.sh) http://www.ladyada.net/learn/avr/setup-unix.html
 ### Who do I talk to? ###
-
-* make@muddygames.com
