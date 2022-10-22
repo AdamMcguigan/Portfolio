@@ -2,7 +2,7 @@
 
 In the Assembly folder, you will get the source code of both my assembly projects / games that i created
 
-In the C++ foler, there is a variety of projects and games all the way from Finite State Machine with animated sprites
+In the C++ foler, there is a variety of projects and games all the way from a console turn based strategy to Finite State Machine with animated sprites
 to tank games with AI that patrol around the map.
 
 In the JavaScript folder, you will find the javaScript game that i created for my Year 2 module UI programming, we had to make it a PWA. 
